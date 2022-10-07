@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+void fun(int *a,int *b,int *c){
+	int p;
+	if(*a < *b){
+		if(*b < *c){		//小中大 
+			p = *c;
+			*c = *a;
+			*a = p;
+		}else{
+			if(*a > *c){	//中大小 
+				p = *b;
+				*b = *a;
+				*a = p;
+			}else{
+				p = *a;		//小大中 
+				*a = *b;
+				*b = *c;
+				*c = p;
+			}
+		}
+	}else{
+		if(*b < *c){
+			if(*a > *c){	//大小中 
+				p = *b;
+				*b = *c;
+				*c = p;
+			}else{
+				p = *a;		//中小大 
+				*a = *c;
+				*c = *b;
+				*b = p;
+			}
+		}
+	}
+}
+
+int main(){
+	int a,b,c;
+	int *point1,*point2,*point3;
+	printf("输入三个数字:\n");
+	scanf("%d %d %d",&a,&b,&c);
+	point1 = &a;
+	point2 = &b;
+	point3 = &c;
+	fun(point1,point2,point3);
+	printf("%d %d %d",*point1,*point2,*point3);
+	return 0;
+}
