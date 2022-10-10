@@ -1,0 +1,46 @@
+给定M行N列的整数矩阵A，如果A的非边界元素A[i][j]大于相邻的上下左右4个元素，那么就称元素A[i][j]是矩阵的局部极大值。
+本题要求给定矩阵的全部局部极大值及其所在的位置。
+
+输入格式：
+输入在第一行中给出矩阵A的行数M和列数N（3≤M,N≤20）；最后M行，每行给出A在该行的N个元素的值。数字间以空格分隔。
+
+输出格式：
+每行按照“元素值 行号 列号”的格式输出一个局部极大值，
+其中行、列编号从1开始。要求按照行号递增输出；若同行有超过1个局部极大值，则该行按列号递增输出。若没有局部极大值，则输出“None 总行数 总列数”。
+
+ 
+#include <stdio.h>
+#include <malloc.h>
+
+int main(){
+    int M,N,i,j,judge=0,ret = 0;
+    scanf("%d %d",&M,&N);
+//     int **A = (int **)malloc(sizeof(int)*M);
+//     for(i = 0;i < M;i++){
+//         A[i] = (int *)malloc(sizeof(int)*N);
+//     }
+    int A[20][20];
+    for(i = 0;i < M;i++){
+        for(j = 0;j < N;j++){
+            scanf("%d",&A[i][j]);
+        }
+    }
+    for(i = 1;i < M-1;i++){
+        for(j = 1;j < N-1;j++){
+            if(judge != ret){               //产生变化即换行
+                printf("\n");
+            }
+            ret = judge;
+            if(A[i][j] > A[i-1][j] 
+               && A[i][j] > A[i+1][j] 
+              && A[i][j] > A[i][j-1] 
+              && A[i][j] > A[i][j+1]){
+                printf("%d %d %d",A[i][j],i+1,j+1);
+                judge++;
+            }
+        }
+    }
+    if(judge == 0){
+        printf("None %d %d",M,N);
+    }
+}
