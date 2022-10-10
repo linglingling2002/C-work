@@ -1,0 +1,17 @@
+输入在一行中按照格式“yyyy/mm/dd”（即“年/月/日”）给出日期。注意：闰年的判别条件是该年年份能被4整除但不能被100整除、或者能被400整除。闰年的2月有29天。
+#include <stdio.h>
+int main(){
+    int i,year,month,day,sum;
+    int monthnumber[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+    scanf("%d/%d/%d",&year,&month,&day);
+    if(year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
+        monthnumber[1] = 29;                //闰年
+    }
+    sum = day;                              //1月
+    if(month != 1){                         //2月以及更大
+        for(i = 0;i < month-1;i++){
+            sum += monthnumber[i];
+        }
+    }
+    printf("%d",sum);
+}
