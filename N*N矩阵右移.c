@@ -1,3 +1,5 @@
+//有N*N矩阵，根据给定的m值，将每行元素中的值均右移m个位置，左边置为0。
+
 #include<stdio.h>
 #include<malloc.h>
 
