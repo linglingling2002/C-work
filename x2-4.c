@@ -3,28 +3,66 @@
 //(2)该数是素数。
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-int main()
+int primeJudge(int num)
 {
-    char * str = malloc(sizeof(char) * 20);
-    int length = 0;
-    char mid = '0';
+    int flag = 0;                   //是素数
 
-    scanf("%s", str);
-    length = (int)strlen(str);
-    for(int i = 0; i < length - 1; i++)
+    for(int i = 2; i < num; i++)
     {
-        for(int j = i + 1; j < length; j++)
+        if((num % i) == 0)
         {
-            if(str[i] > str[j])
+            flag = 1;               //不是素数
+            break;
+        }
+    }
+    return flag;
+}
+int twoSame(int num)
+{
+    int i = 0;
+    int a[5] = {0};
+    int flag = 0;
+
+    while(num != 0)
+    {
+        a[i] = num % 10;
+        i++;
+        num = num / 10;
+    }
+    if(1 == i)
+    {
+        return 0;           //一位数
+    }
+
+    for(int j = 0; j < i - 1; j++)
+    {
+        for(int n = j + 1; n < i; n++)
+        {
+            if(a[j] == a[n])
             {
-                mid = str[i];
-                str[i] = str[j];
-                str[j] = mid;
+                flag++;
             }
         }
     }
-    printf("%s\n", str);
+    if(flag == 1)
+    {
+        return 1;           //符合要求
+    }
+    return 0;               //不符合
+}
+
+int main()
+{
+    int n1 = 0;
+    int n2 = 0;
+    printf("input n1,n2  0<n1<n2<32768\n");
+    scanf("%d%d", &n1, &n2);
+    for(int i = n1 + 1; i < n2; i++)
+    {
+        if(primeJudge(i) == 0 && twoSame(i) && i != 1)
+        {
+            printf("%d\t", i);
+        }
+    }
+    return 0;
 }
